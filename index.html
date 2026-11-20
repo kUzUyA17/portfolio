@@ -185,6 +185,7 @@
       font-size: 0.7rem;
       letter-spacing: 0.02em;
       color: #9CA3AF;
+      white-space: nowrap;
     }
 
     .nav-link.is-active { color: #D4A373; }
@@ -384,102 +385,136 @@
       </div>
     </section>
 
-    <section id="skills" class="px-6 py-20" aria-labelledby="skills-heading">
+    <section id="skills" class="px-6 py-12" aria-labelledby="skills-heading">
       <div class="max-w-[75rem] mx-auto">
-        <h2 id="skills-heading" class="font-serif text-3xl sm:text-4xl mb-10 fade-up">
+        <h2 id="skills-heading" class="font-serif text-3xl sm:text-4xl mb-6 fade-up">
           <span class="lang-en">Skills</span>
           <span class="lang-ru">Навыки</span>
         </h2>
-        <div class="grid sm:grid-cols-2 gap-8">
-          <div class="fade-up">
-            <p class="text-xs tracking-[0.25em] uppercase text-amber mb-4">
-              <span class="lang-en">AI &amp; LLM</span>
-              <span class="lang-ru">ИИ и LLM</span>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+          <article class="fade-up card-hover group hover:border-[#D4A373]/30 hover:shadow-[0_0_30px_rgba(212,163,115,0.15)] transition-all duration-300 rounded-2xl border border-white/10 bg-card p-8 flex flex-col h-full">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4A373" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-4" aria-hidden="true">
+              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+              <path d="M5 3v4"/>
+              <path d="M3 5h4"/>
+              <path d="M19 17v4"/>
+              <path d="M17 19h4"/>
+            </svg>
+            <h3 class="text-xs tracking-[0.25em] uppercase text-amber mb-3">
+              <span class="lang-en">Prompts &amp; LLM</span>
+              <span class="lang-ru">Промпты и LLM</span>
+            </h3>
+            <p class="text-sm text-muted leading-relaxed mb-4 flex-1">
+              <span class="lang-en">I write system prompts that produce predictable results.</span>
+              <span class="lang-ru">Пишу системные промпты, которые дают предсказуемый результат.</span>
             </p>
-            <ul class="text-muted leading-relaxed space-y-2">
-              <li>Prompt Engineering</li>
-              <li>RAG</li>
-              <li>JSON-output prompting</li>
-              <li>
-                <span class="lang-en">LLM response validation</span>
-                <span class="lang-ru">валидация ответов LLM</span>
-              </li>
-              <li>
-                <span class="lang-en">dialogue and intent logic</span>
-                <span class="lang-ru">логика диалога и интентов</span>
-              </li>
-            </ul>
-          </div>
-          <div class="fade-up">
-            <p class="text-xs tracking-[0.25em] uppercase text-amber mb-4">
+            <div class="flex flex-wrap gap-2 mt-auto">
+              <span class="chip">Prompt engineering</span>
+              <span class="chip">RAG</span>
+              <span class="chip">
+                <span class="lang-en">JSON output</span>
+                <span class="lang-ru">JSON-вывод</span>
+              </span>
+              <span class="chip">
+                <span class="lang-en">Response validation</span>
+                <span class="lang-ru">Валидация ответов</span>
+              </span>
+              <span class="chip">
+                <span class="lang-en">Dialogue logic</span>
+                <span class="lang-ru">Логика диалога</span>
+              </span>
+              <span class="chip">
+                <span class="lang-en">Intents</span>
+                <span class="lang-ru">Интенты</span>
+              </span>
+            </div>
+          </article>
+
+          <article class="fade-up card-hover group hover:border-[#D4A373]/30 hover:shadow-[0_0_30px_rgba(212,163,115,0.15)] transition-all duration-300 rounded-2xl border border-white/10 bg-card p-8 flex flex-col h-full">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4A373" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-4" aria-hidden="true">
+              <path d="M12 8V4H8"/>
+              <rect width="16" height="12" x="4" y="8" rx="2"/>
+              <path d="M2 14h2"/>
+              <path d="M20 14h2"/>
+              <path d="M9 13v2"/>
+              <path d="M15 13v2"/>
+            </svg>
+            <h3 class="text-xs tracking-[0.25em] uppercase text-amber mb-3">
               <span class="lang-en">AI Agents</span>
               <span class="lang-ru">ИИ-агенты</span>
+            </h3>
+            <p class="text-sm text-muted leading-relaxed mb-4 flex-1">
+              <span class="lang-en">I design text and voice agents and connect them to business systems.</span>
+              <span class="lang-ru">Проектирую текстовых и голосовых агентов и подключаю их к бизнес-системам.</span>
             </p>
-            <ul class="text-muted leading-relaxed space-y-2">
-              <li>
-                <span class="lang-en">text and voice agents</span>
-                <span class="lang-ru">текстовые и голосовые агенты</span>
-              </li>
-              <li>
-                <span class="lang-en">scenarios and branching</span>
-                <span class="lang-ru">сценарии и ветвление</span>
-              </li>
-              <li>
-                <span class="lang-en">knowledge bases and vector stores</span>
-                <span class="lang-ru">базы знаний и векторные хранилища</span>
-              </li>
-              <li>
-                <span class="lang-en">CRM integrations (Bitrix24) via REST API and webhooks</span>
-                <span class="lang-ru">интеграции с CRM (Bitrix24) через REST API и вебхуки</span>
-              </li>
-              <li>
-                <span class="lang-en">speech synthesis (ElevenLabs)</span>
-                <span class="lang-ru">синтез речи (ElevenLabs)</span>
-              </li>
-              <li>
-                <span class="lang-en">Twin platform</span>
-                <span class="lang-ru">платформа Twin</span>
-              </li>
-            </ul>
-          </div>
-          <div class="fade-up">
-            <p class="text-xs tracking-[0.25em] uppercase text-amber mb-4">
-              <span class="lang-en">Development</span>
-              <span class="lang-ru">Разработка</span>
+            <div class="flex flex-wrap gap-2 mt-auto">
+              <span class="chip">
+                <span class="lang-en">Voice agents</span>
+                <span class="lang-ru">Голосовые агенты</span>
+              </span>
+              <span class="chip">
+                <span class="lang-en">Flows &amp; branching</span>
+                <span class="lang-ru">Сценарии и ветвление</span>
+              </span>
+              <span class="chip">
+                <span class="lang-en">Vector knowledge bases</span>
+                <span class="lang-ru">Векторные базы знаний</span>
+              </span>
+              <span class="chip">Bitrix24</span>
+              <span class="chip">REST API</span>
+              <span class="chip">Webhooks</span>
+              <span class="chip">ElevenLabs</span>
+              <span class="chip">Twin</span>
+            </div>
+          </article>
+
+          <article class="fade-up card-hover group hover:border-[#D4A373]/30 hover:shadow-[0_0_30px_rgba(212,163,115,0.15)] transition-all duration-300 rounded-2xl border border-white/10 bg-card p-8 flex flex-col h-full">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4A373" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-4" aria-hidden="true">
+              <path d="m16 18 6-6-6-6"/>
+              <path d="m8 6-6 6 6 6"/>
+            </svg>
+            <h3 class="text-xs tracking-[0.25em] uppercase text-amber mb-3">
+              <span class="lang-en">Development &amp; Tools</span>
+              <span class="lang-ru">Разработка и инструменты</span>
+            </h3>
+            <p class="text-sm text-muted leading-relaxed mb-4 flex-1">
+              <span class="lang-en">I build web apps with AI assistants; Python and SQL at a basic level.</span>
+              <span class="lang-ru">Собираю веб-приложения с ИИ-ассистентами; Python и SQL — на базовом уровне.</span>
             </p>
-            <ul class="text-muted leading-relaxed space-y-2">
-              <li>Next.js</li>
-              <li>TypeScript</li>
-              <li>Supabase</li>
-              <li>Python (AI-assisted)</li>
-              <li>
-                <span class="lang-en">SQL (basic)</span>
-                <span class="lang-ru">SQL (базовый)</span>
-              </li>
-              <li>Gemini API</li>
-              <li>Flux.1</li>
-            </ul>
-          </div>
-          <div class="fade-up">
-            <p class="text-xs tracking-[0.25em] uppercase text-amber mb-4">
-              <span class="lang-en">Tools</span>
-              <span class="lang-ru">Инструменты</span>
-            </p>
-            <ul class="text-muted leading-relaxed space-y-2">
-              <li>Cursor</li>
-              <li>ChatGPT</li>
-              <li>Claude</li>
-            </ul>
-          </div>
+            <div class="flex flex-wrap gap-2 mt-auto">
+              <span class="chip">Next.js</span>
+              <span class="chip">TypeScript</span>
+              <span class="chip">Supabase</span>
+              <span class="chip">Gemini API</span>
+              <span class="chip">Flux.1</span>
+              <span class="chip">Python</span>
+              <span class="chip">SQL</span>
+              <span class="chip">Cursor</span>
+              <span class="chip">Claude</span>
+              <span class="chip">ChatGPT</span>
+            </div>
+          </article>
         </div>
-        <p class="fade-up mt-10 text-muted text-sm leading-relaxed">
-          <span class="text-xs tracking-[0.25em] uppercase text-amber mr-3">
+        <div class="fade-up mt-6 flex flex-wrap items-center gap-x-4 gap-y-3">
+          <p class="text-xs tracking-[0.25em] uppercase text-amber shrink-0">
             <span class="lang-en">Languages</span>
             <span class="lang-ru">Языки</span>
-          </span>
-          <span class="lang-en">Russian — native, English — B2, Deutsch — B1</span>
-          <span class="lang-ru">Русский — родной, English — B2, Deutsch — B1</span>
-        </p>
+          </p>
+          <div class="flex flex-wrap gap-2 sm:ml-auto">
+            <span class="chip">
+              <span class="lang-en">Russian — native</span>
+              <span class="lang-ru">Русский — родной</span>
+            </span>
+            <span class="chip">
+              <span class="lang-en">English — B2</span>
+              <span class="lang-ru">Английский — B2</span>
+            </span>
+            <span class="chip">
+              <span class="lang-en">German — B1</span>
+              <span class="lang-ru">Немецкий — B1</span>
+            </span>
+          </div>
+        </div>
       </div>
     </section>
 
