@@ -194,6 +194,17 @@
       color: #D4A373;
     }
 
+    #mobile-nav {
+      display: none;
+      flex-direction: column;
+    }
+    #mobile-nav.is-open {
+      display: flex;
+    }
+    @media (min-width: 768px) {
+      #mobile-nav.is-open { display: none; }
+    }
+
     a:focus-visible,
     button:focus-visible,
     summary:focus-visible {
@@ -278,7 +289,7 @@
       </div>
     </div>
 
-    <nav id="mobile-nav" class="md:hidden border-t border-white/5 px-6 py-4 flex flex-col gap-3 text-muted" hidden aria-label="Mobile">
+    <nav id="mobile-nav" class="border-t border-white/5 px-6 py-4 gap-3 text-muted" hidden aria-label="Mobile">
       <a href="#about" data-nav class="nav-link py-1 hover:text-amber">
         <span class="lang-en">About</span><span class="lang-ru">Обо мне</span>
       </a>
@@ -849,6 +860,7 @@
     function setMenuOpen(open, restoreFocus) {
       menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
       mobileNav.hidden = !open;
+      mobileNav.classList.toggle("is-open", open);
       if (open) {
         var firstLink = mobileNav.querySelector("a");
         if (firstLink) firstLink.focus();
@@ -866,6 +878,10 @@
     });
 
     document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && salesDialog.open) {
+        closeCase();
+        return;
+      }
       var menuOpen = menuToggle.getAttribute("aria-expanded") === "true";
       if (event.key === "Escape" && menuOpen) {
         setMenuOpen(false);
