@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <rect width="100" height="100" fill="#1A1D24"/>
-  <text x="50" y="68" font-family="'Playfair Display', Georgia, serif" font-size="42" font-weight="bold" fill="#D4A373" text-anchor="middle" letter-spacing="2">PK</text>
+  <path fill="#D4A373" fill-rule="evenodd" d="M16 18h26c13.3 0 22 8 22 20.2S55.3 58.4 42 58.4H30.5V82H16V18zm14.5 11.5v17.4H41c6.8 0 10.7-3.7 10.7-8.7 0-5-3.9-8.7-10.7-8.7H30.5z"/>
+  <path fill="#D4A373" d="M64 18h13v24.4L95 18h13L79.6 48.2 100 82H86L77 68.2 64 82h-9l22.2-25.6L55 18h9z"/>
 </svg>
