@@ -2,10 +2,60 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    (function () {
+      var titles = {
+        en: "Polina Kuzina — AI Designer & Writer",
+        ru: "Полина Кузина — ИИ-дизайнер и писательница"
+      };
+      var descriptions = {
+        en: "I design AI agents and conversations that sound human. I write prose about psychology.",
+        ru: "Проектирую ИИ-агентов и диалоги, которые звучат по-человечески. Пишу прозу о психологии."
+      };
+      var lang = "en";
+      try {
+        var saved = localStorage.getItem("lang");
+        if (saved === "ru" || saved === "en") lang = saved;
+        else if (((navigator.language || "") + "").toLowerCase().indexOf("ru") === 0) lang = "ru";
+      } catch (e) {}
+      document.documentElement.setAttribute("lang", lang);
+      document.title = titles[lang];
+      window.__SITE_I18N__ = { titles: titles, descriptions: descriptions };
+    })();
+  </script>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <meta name="theme-color" content="#1A1D24" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Polina Kuzina — AI Designer &amp; Writer</title>
-  <meta name="description" content="Polina Kuzina — AI Designer & Writer. Empath with an analytical mind." />
+  <meta name="description" content="I design AI agents and conversations that sound human. I write prose about psychology." />
+  <link rel="canonical" href="https://kuzuya17.github.io/portfolio/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kuzuya17.github.io/portfolio/" />
+  <meta property="og:title" content="Polina Kuzina — AI Designer & Writer" />
+  <meta property="og:description" content="I design AI agents and conversations that sound human. I write prose about psychology." />
+  <meta property="og:image" content="https://kuzuya17.github.io/portfolio/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Polina Kuzina — AI Designer & Writer" />
+  <meta name="twitter:description" content="I design AI agents and conversations that sound human. I write prose about psychology." />
+  <meta name="twitter:image" content="https://kuzuya17.github.io/portfolio/og-image.jpg" />
+  <script>
+    (function () {
+      var i = window.__SITE_I18N__;
+      if (!i) return;
+      var lang = document.documentElement.getAttribute("lang") === "ru" ? "ru" : "en";
+      var desc = document.querySelector('meta[name="description"]');
+      if (desc) desc.setAttribute("content", i.descriptions[lang]);
+      var ogT = document.querySelector('meta[property="og:title"]');
+      var ogD = document.querySelector('meta[property="og:description"]');
+      var twT = document.querySelector('meta[name="twitter:title"]');
+      var twD = document.querySelector('meta[name="twitter:description"]');
+      if (ogT) ogT.setAttribute("content", i.titles[lang]);
+      if (ogD) ogD.setAttribute("content", i.descriptions[lang]);
+      if (twT) twT.setAttribute("content", i.titles[lang]);
+      if (twD) twD.setAttribute("content", i.descriptions[lang]);
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
@@ -31,9 +81,9 @@
   </script>
   <style>
     html { scroll-behavior: smooth; }
+    section[id], #contact { scroll-margin-top: 5.5rem; }
 
     .lang-ru { display: none; }
-
     html[lang="ru"] .lang-en { display: none; }
     html[lang="ru"] .lang-ru { display: inline; }
 
@@ -74,35 +124,194 @@
     .gold-rule {
       background: linear-gradient(90deg, transparent, #D4A373, transparent);
     }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -100%;
+      z-index: 100;
+      padding: 0.6rem 1rem;
+      border-radius: 9999px;
+      background: #D4A373;
+      color: #1A1D24;
+      font-weight: 600;
+    }
+    .skip-link:focus {
+      top: 0.75rem;
+    }
+
+    .btn-primary,
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      font-medium;
+      transition: all 0.3s ease;
+      border-width: 1px;
+    }
+    .btn-primary {
+      background: #D4A373;
+      color: #1A1D24;
+      border-color: transparent;
+    }
+    .btn-outline {
+      background: transparent;
+      color: #D4A373;
+      border-color: rgba(212, 163, 115, 0.5);
+    }
+    .btn-primary:hover,
+    .btn-outline:hover {
+      background: transparent;
+      color: #D4A373;
+      border-color: #D4A373;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0.15rem 0.65rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.02em;
+      color: #9CA3AF;
+    }
+
+    .nav-link.is-active { color: #D4A373; }
+
+    html[lang="en"] .lang-btn[data-lang="en"],
+    html[lang="ru"] .lang-btn[data-lang="ru"] {
+      color: #D4A373;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    summary:focus-visible {
+      outline: 2px solid #D4A373;
+      outline-offset: 3px;
+    }
+
+    #sales-case {
+      background: #23262E;
+      color: #F3F4F6;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      padding: 1.75rem;
+      max-width: 40rem;
+      width: calc(100% - 2rem);
+    }
+    #sales-case::backdrop {
+      background: rgba(26, 29, 36, 0.82);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .fade-up {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .type-cursor::after {
+        content: none;
+        animation: none;
+      }
+    }
   </style>
 </head>
-<body class="bg-ink text-paper font-sans antialiased">
+<body id="top" class="bg-ink text-paper font-sans antialiased">
+  <a href="#main" class="skip-link">
+    <span class="lang-en">Skip to content</span>
+    <span class="lang-ru">Перейти к содержанию</span>
+  </a>
+
   <header class="sticky top-0 z-50 bg-[#1A1D24]/80 backdrop-blur-md border-b border-white/5 transition-all duration-300">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-end">
-      <button
-        id="lang-toggle"
-        type="button"
-        aria-label="Switch language"
-        class="text-sm tracking-[0.2em] uppercase text-muted hover:text-amber transition-colors duration-300"
-      >
-        RU / EN
-      </button>
+    <div class="max-w-[75rem] mx-auto px-6 py-4 flex items-center justify-between gap-4">
+      <a href="#top" class="font-serif text-lg text-paper hover:text-amber transition-colors shrink-0">
+        <span class="lang-en">Polina Kuzina</span>
+        <span class="lang-ru">Полина Кузина</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-6 text-sm text-muted" aria-label="Primary">
+        <a href="#about" data-nav class="nav-link hover:text-amber transition-colors">
+          <span class="lang-en">About</span><span class="lang-ru">Обо мне</span>
+        </a>
+        <a href="#skills" data-nav class="nav-link hover:text-amber transition-colors">
+          <span class="lang-en">Skills</span><span class="lang-ru">Навыки</span>
+        </a>
+        <a href="#projects" data-nav class="nav-link hover:text-amber transition-colors">
+          <span class="lang-en">Projects</span><span class="lang-ru">Проекты</span>
+        </a>
+        <a href="#contact" data-nav class="nav-link hover:text-amber transition-colors">
+          <span class="lang-en">Contact</span><span class="lang-ru">Контакты</span>
+        </a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-1 text-sm tracking-[0.2em] uppercase text-muted" role="group" aria-label="Language">
+          <button type="button" class="lang-btn hover:text-amber transition-colors" data-lang="en" aria-pressed="true">EN</button>
+          <span aria-hidden="true">/</span>
+          <button type="button" class="lang-btn hover:text-amber transition-colors" data-lang="ru" aria-pressed="false">RU</button>
+        </div>
+        <button
+          id="menu-toggle"
+          type="button"
+          class="md:hidden p-2 text-paper"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+        >
+          <span class="sr-only lang-en">Open menu</span>
+          <span class="sr-only lang-ru">Открыть меню</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
     </div>
+
+    <nav id="mobile-nav" class="md:hidden border-t border-white/5 px-6 py-4 flex flex-col gap-3 text-muted" hidden aria-label="Mobile">
+      <a href="#about" data-nav class="nav-link py-1 hover:text-amber">
+        <span class="lang-en">About</span><span class="lang-ru">Обо мне</span>
+      </a>
+      <a href="#skills" data-nav class="nav-link py-1 hover:text-amber">
+        <span class="lang-en">Skills</span><span class="lang-ru">Навыки</span>
+      </a>
+      <a href="#projects" data-nav class="nav-link py-1 hover:text-amber">
+        <span class="lang-en">Projects</span><span class="lang-ru">Проекты</span>
+      </a>
+      <a href="#contact" data-nav class="nav-link py-1 hover:text-amber">
+        <span class="lang-en">Contact</span><span class="lang-ru">Контакты</span>
+      </a>
+    </nav>
   </header>
 
-  <main>
-    <section class="min-h-screen flex items-center pt-24 pb-16 px-6">
-      <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-center w-full">
+  <main id="main">
+    <section class="min-h-[85vh] flex items-center pt-6 pb-16 px-6" aria-labelledby="hero-name">
+      <div class="max-w-[75rem] mx-auto grid md:grid-cols-2 gap-8 items-center w-full">
         <div class="fade-up flex justify-center md:justify-start">
           <div class="relative w-64 sm:w-72 md:w-80 aspect-[4/5]">
             <div class="relative w-full h-full">
-            <div class="absolute inset-0 bg-[#D4A373] blur-[80px] opacity-20 rounded-full scale-75"></div>
-            <img
-              src="polina.jpg"
-              alt="Polina Kuzina"
-              class="photo-frame relative w-full h-full object-cover rounded-2xl"
-              onerror="(function(img){var tries=['polina.png','polina.jpeg'];var i=tries.indexOf(img.dataset.next||'polina.png');if(!img.dataset.next){img.dataset.next=tries[0];img.src=tries[0];return;}if(i>=0&&i<tries.length-1){img.dataset.next=tries[i+1];img.src=tries[i+1];return;}img.parentElement.classList.add('hidden');img.parentElement.nextElementSibling.classList.remove('hidden');})(this);"
-            />
+              <div class="absolute inset-0 bg-[#D4A373] blur-[80px] opacity-20 rounded-full scale-75"></div>
+              <img
+                src="polina.jpg"
+                alt="Polina Kuzina"
+                width="640"
+                height="800"
+                class="photo-frame relative w-full h-full object-cover rounded-2xl"
+                onerror="(function(img){var tries=['polina.png','polina.jpeg'];var i=tries.indexOf(img.dataset.next||'polina.png');if(!img.dataset.next){img.dataset.next=tries[0];img.src=tries[0];return;}if(i>=0&&i<tries.length-1){img.dataset.next=tries[i+1];img.src=tries[i+1];return;}img.parentElement.classList.add('hidden');img.parentElement.nextElementSibling.classList.remove('hidden');})(this);"
+              />
             </div>
             <div class="hidden photo-frame w-full h-full rounded-2xl bg-card flex flex-col items-center justify-center border border-amber/20">
               <span class="font-serif text-5xl text-amber">PK</span>
@@ -116,7 +325,7 @@
             <span class="lang-en">Portfolio</span>
             <span class="lang-ru">Портфолио</span>
           </p>
-          <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl font-semibold leading-tight">
+          <h1 id="hero-name" class="font-serif text-4xl sm:text-5xl md:text-6xl font-semibold leading-tight">
             <span class="lang-en">Polina Kuzina</span>
             <span class="lang-ru">Полина Кузина</span>
           </h1>
@@ -125,14 +334,11 @@
             <span class="lang-ru">ИИ-дизайнер и писательница</span>
           </h2>
           <p class="mt-6 text-muted leading-relaxed max-w-md mx-auto md:mx-0">
-            <span class="lang-en">Empath with an analytical mind. I build AI agents that understand humans, and write stories about what makes us human.</span>
-            <span class="lang-ru">Эмпат с аналитическим складом ума. Я создаю ИИ-агентов, которые понимают людей, и пишу истории о том, что делает нас людьми.</span>
+            <span class="lang-en">I design AI agents and conversations that sound human. I write prose about psychology.</span>
+            <span class="lang-ru">Проектирую ИИ-агентов и диалоги, которые звучат по-человечески. Пишу прозу о психологии.</span>
           </p>
           <div class="mt-8 flex flex-wrap gap-4 justify-center md:justify-start">
-            <a
-              href="mailto:kuzina.polina2015@gmail.com"
-              class="inline-flex items-center px-6 py-3 rounded-full bg-amber text-ink font-medium border border-transparent hover:bg-transparent hover:text-[#D4A373] hover:border-[#D4A373] transition-all duration-300"
-            >
+            <a href="mailto:kuzina.polina2015@gmail.com" class="btn-primary px-6 py-3">
               <span class="lang-en">Email Me</span>
               <span class="lang-ru">Написать мне</span>
             </a>
@@ -140,19 +346,26 @@
               href="https://t.me/kUzYa_17"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center px-6 py-3 rounded-full border border-amber/50 text-amber hover:bg-transparent hover:text-[#D4A373] hover:border-[#D4A373] transition-all duration-300"
+              class="btn-outline px-6 py-3"
             >
               Telegram
+              <span class="sr-only lang-en">(opens in a new tab)</span>
+              <span class="sr-only lang-ru">(откроется в новой вкладке)</span>
+            </a>
+            <!-- TODO: add cv.pdf -->
+            <a href="cv.pdf" download class="btn-outline px-6 py-3">
+              <span class="lang-en">Download CV</span>
+              <span class="lang-ru">Скачать резюме</span>
             </a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="px-6 py-20">
+    <section id="about" class="px-6 py-20" aria-labelledby="about-heading">
       <div class="max-w-3xl mx-auto fade-up">
         <div class="h-px gold-rule mb-12 opacity-60"></div>
-        <h2 class="font-serif text-3xl sm:text-4xl mb-6">
+        <h2 id="about-heading" class="font-serif text-3xl sm:text-4xl mb-6">
           <span class="lang-en">About</span>
           <span class="lang-ru">Обо мне</span>
         </h2>
@@ -163,27 +376,108 @@
       </div>
     </section>
 
-    <section class="px-6 py-20">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="font-serif text-3xl sm:text-4xl mb-10 fade-up">
+    <section id="skills" class="px-6 py-20" aria-labelledby="skills-heading">
+      <div class="max-w-[75rem] mx-auto">
+        <h2 id="skills-heading" class="font-serif text-3xl sm:text-4xl mb-10 fade-up">
+          <span class="lang-en">Skills</span>
+          <span class="lang-ru">Навыки</span>
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="fade-up">
+            <p class="text-xs tracking-[0.25em] uppercase text-amber mb-4">
+              <span class="lang-en">AI &amp; Prompting</span>
+              <span class="lang-ru">ИИ и промпты</span>
+            </p>
+            <ul class="text-muted leading-relaxed space-y-2">
+              <li>system prompts</li>
+              <li>RAG</li>
+              <li>
+                <span class="lang-en">dialogue logic</span>
+                <span class="lang-ru">логика диалога</span>
+              </li>
+              <li>
+                <span class="lang-en">structured JSON output</span>
+                <span class="lang-ru">структурированный JSON-вывод</span>
+              </li>
+              <li>
+                <span class="lang-en">response quality evaluation</span>
+                <span class="lang-ru">оценка качества ответов</span>
+              </li>
+            </ul>
+          </div>
+          <div class="fade-up">
+            <p class="text-xs tracking-[0.25em] uppercase text-amber mb-4">
+              <span class="lang-en">Development</span>
+              <span class="lang-ru">Разработка</span>
+            </p>
+            <ul class="text-muted leading-relaxed space-y-2">
+              <li>Next.js</li>
+              <li>React</li>
+              <li>Tailwind CSS</li>
+              <li>Supabase (RLS)</li>
+              <li>
+                <span class="lang-en">LLM API integration</span>
+                <span class="lang-ru">интеграция LLM API</span>
+              </li>
+            </ul>
+          </div>
+          <div class="fade-up">
+            <p class="text-xs tracking-[0.25em] uppercase text-amber mb-4">
+              <span class="lang-en">Writing &amp; Psychology</span>
+              <span class="lang-ru">Текст и психология</span>
+            </p>
+            <ul class="text-muted leading-relaxed space-y-2">
+              <li>
+                <span class="lang-en">UX copywriting</span>
+                <span class="lang-ru">UX-копирайтинг</span>
+              </li>
+              <li>
+                <span class="lang-en">prose</span>
+                <span class="lang-ru">проза</span>
+              </li>
+              <li>
+                <span class="lang-en">empathetic tone</span>
+                <span class="lang-ru">эмпатичный тон</span>
+              </li>
+              <li>
+                <span class="lang-en">user research</span>
+                <span class="lang-ru">исследование пользователей</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="px-6 py-20" aria-labelledby="projects-heading">
+      <div class="max-w-[75rem] mx-auto">
+        <h2 id="projects-heading" class="font-serif text-3xl sm:text-4xl mb-10 fade-up">
           <span class="lang-en">Projects</span>
           <span class="lang-ru">Проекты</span>
         </h2>
+
         <article class="fade-up card-hover group hover:border-[#D4A373]/30 hover:shadow-[0_0_30px_rgba(212,163,115,0.15)] transition-all duration-300 rounded-2xl border border-white/10 bg-card p-8 mb-6">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
               <p class="text-xs tracking-[0.25em] uppercase text-amber mb-3">
                 <span class="lang-en">AI PRODUCT</span>
-                <span class="lang-ru">AI-ПРОДУКТ</span>
+                <span class="lang-ru">ИИ-ПРОДУКТ</span>
               </p>
               <h3 class="font-serif text-2xl mb-4">
                 <span class="lang-en">Enso — AI Tattoo References</span>
-                <span class="lang-ru">Enso — AI-референсы для тату</span>
+                <span class="lang-ru">Enso — ИИ-референсы для тату</span>
               </h3>
-              <p class="text-muted leading-relaxed mb-6">
-                <span class="lang-en">A full-stack web app that turns quiz answers into personalized tattoo references. I engineered a strict JSON-output prompt matrix for Gemini (empathetic write-up + English-language image prompts), wired up parallel generation via Flux.1 [dev], and built a caching layer in localStorage to cut API costs. Powered by Next.js 16 and Supabase with Row Level Security.</span>
-                <span class="lang-ru">Веб-приложение, которое генерирует тату-референсы по психологическому портрету пользователя. Спроектировала матрицу системных промптов для Gemini (строгий JSON: эмпатичное описание + англоязычные промпты), интегрировала параллельную генерацию через Flux.1 [dev] и добавила кэширование в localStorage, чтобы сократить расходы на API. Fullstack на Next.js 16 и Supabase с политикой Row Level Security.</span>
+              <p class="text-muted leading-relaxed mb-4">
+                <span class="lang-en">A full-stack app that turns quiz answers into personalized tattoo references — with a strict Gemini JSON prompt matrix, parallel Flux.1 generation, and localStorage caching to cut API cost.</span>
+                <span class="lang-ru">Веб-приложение, которое превращает ответы квиза в персональные тату-референсы: строгая JSON-матрица промптов для Gemini, параллельная генерация Flux.1 и кэш в localStorage, чтобы снизить расходы на API.</span>
               </p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="chip">Next.js 16</span>
+                <span class="chip">Supabase</span>
+                <span class="chip">RLS</span>
+                <span class="chip">Gemini</span>
+                <span class="chip">Flux.1</span>
+              </div>
               <a
                 href="https://enso.wiki/"
                 target="_blank"
@@ -193,14 +487,34 @@
                 <span class="lang-en">Try it out</span>
                 <span class="lang-ru">Посмотреть сайт</span>
                 <span class="ml-2" aria-hidden="true">↗</span>
+                <span class="sr-only lang-en">(opens in a new tab)</span>
+                <span class="sr-only lang-ru">(откроется в новой вкладке)</span>
               </a>
             </div>
-            <img src="enso-gallery.jpg" alt="Enso Interface" class="rounded-xl w-full h-auto object-cover border border-white/10 shadow-lg" />
+            <img
+              src="enso-gallery.jpg"
+              alt="Enso interface: tattoo reference gallery"
+              width="960"
+              height="600"
+              loading="lazy"
+              class="rounded-xl w-full h-auto object-cover border border-white/10 shadow-lg aspect-[16/10]"
+            />
           </div>
         </article>
 
         <div class="grid md:grid-cols-2 gap-6">
           <article class="fade-up card-hover group hover:border-[#D4A373]/30 hover:shadow-[0_0_30px_rgba(212,163,115,0.15)] transition-all duration-300 rounded-2xl border border-white/10 bg-card p-8">
+            <!-- TODO: add sales-preview.jpg -->
+            <div class="aspect-[16/10] rounded-xl border border-white/10 mb-6 bg-gradient-to-br from-card to-ink flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4A373" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 8V4H8"/>
+                <rect width="16" height="12" x="4" y="8" rx="2"/>
+                <path d="M2 14h2"/>
+                <path d="M20 14h2"/>
+                <path d="M9 13v2"/>
+                <path d="M15 13v2"/>
+              </svg>
+            </div>
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4A373" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-4" aria-hidden="true">
               <path d="M12 8V4H8"/>
               <rect width="16" height="12" x="4" y="8" rx="2"/>
@@ -215,15 +529,31 @@
             </p>
             <h3 class="font-serif text-2xl mb-4">
               <span class="lang-en">AI Sales Agent (B2B Automation)</span>
-              <span class="lang-ru">ИИ-Агент по продажам (B2B)</span>
+              <span class="lang-ru">ИИ-агент по продажам (B2B)</span>
             </h3>
-            <p class="text-muted leading-relaxed">
-              <span class="lang-en">An autonomous AI agent built upon an existing scripted bot. When the old bot's accuracy plateaued at 97%, I proposed transferring its logic into an AI agent to better handle unpredictable B2B sales queries. I adapted the system prompts and implemented a RAG knowledge base, preserving the familiar business logic while making the dialogue more flexible.</span>
-              <span class="lang-ru">Автономный ИИ-агент, созданный на базе существующего сценарного бота. Когда точность старого бота остановилась на 97%, я предложила перенести его логику в AI-агента для лучшей обработки непредсказуемых запросов в B2B-продажах. Я адаптировала системные промпты и внедрила базу знаний на основе RAG, сохранив привычную бизнес-логику, но сделав диалог более гибким.</span>
+            <p class="text-muted leading-relaxed mb-4">
+              <span class="lang-en">Transferred an existing scripted bot into an AI agent after accuracy plateaued at 97%, keeping business logic while making dialogue more flexible with RAG.</span>
+              <span class="lang-ru">Перенесла логику сценарного бота в ИИ-агента, когда точность остановилась на 97%: сохранила бизнес-логику и сделала диалог гибче с помощью RAG.</span>
             </p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="chip">RAG</span>
+              <span class="chip">System prompts</span>
+              <span class="chip">LLM</span>
+            </div>
+            <button type="button" id="open-sales-case" class="inline-flex items-center text-amber hover:underline underline-offset-4">
+              <span class="lang-en">Read case</span>
+              <span class="lang-ru">Читать кейс</span>
+            </button>
           </article>
 
           <article class="fade-up card-hover group hover:border-[#D4A373]/30 hover:shadow-[0_0_30px_rgba(212,163,115,0.15)] transition-all duration-300 rounded-2xl border border-white/10 bg-card p-8">
+            <!-- TODO: add prose-preview.jpg -->
+            <div class="aspect-[16/10] rounded-xl border border-white/10 mb-6 bg-gradient-to-br from-card to-ink flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4A373" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 20h9"/>
+                <path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/>
+              </svg>
+            </div>
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4A373" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-4" aria-hidden="true">
               <path d="M12 20h9"/>
               <path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/>
@@ -236,10 +566,14 @@
               <span class="lang-en">Literary Prose &amp; Psychological Writing</span>
               <span class="lang-ru">Литературная проза и психология</span>
             </h3>
-            <p class="text-muted leading-relaxed mb-6">
-              <span class="lang-en">A custom-built literary website for publishing psychological prose and poetry. I designed the UI with a focus on readability and a 'Dark Academia' aesthetic, using Tailwind CSS and responsive layouts. The site features smooth scroll animations and is optimized for an immersive, distraction-free reading experience.</span>
-              <span class="lang-ru">Кастомный литературный сайт для публикации психологической прозы и поэзии. Я разработала интерфейс с фокусом на читаемость и эстетику «тёмной академии», используя Tailwind CSS и адаптивную верстку. Сайт включает плавные анимации при скролле и оптимизирован для иммерсивного чтения без отвлекающих факторов.</span>
+            <p class="text-muted leading-relaxed mb-4">
+              <span class="lang-en">A Dark Academia literary site for psychological prose and poetry, built for immersive, distraction-free reading.</span>
+              <span class="lang-ru">Литературный сайт в эстетике тёмной академии для психологической прозы и поэзии — иммерсивное чтение без лишнего шума.</span>
             </p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="chip">Tailwind CSS</span>
+              <span class="chip">Responsive</span>
+            </div>
             <a
               href="https://kuzuya17.github.io/prose/"
               target="_blank"
@@ -249,10 +583,18 @@
               <span class="lang-en">Read my prose</span>
               <span class="lang-ru">Читать мою прозу</span>
               <span class="ml-2" aria-hidden="true">↗</span>
+              <span class="sr-only lang-en">(opens in a new tab)</span>
+              <span class="sr-only lang-ru">(откроется в новой вкладке)</span>
             </a>
           </article>
 
           <article class="fade-up card-hover group hover:border-[#D4A373]/30 hover:shadow-[0_0_30px_rgba(212,163,115,0.15)] transition-all duration-300 rounded-2xl border border-white/10 bg-card p-8">
+            <!-- TODO: add mood-tracker-preview.jpg -->
+            <div class="aspect-[16/10] rounded-xl border border-white/10 mb-6 bg-gradient-to-br from-card to-ink flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4A373" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/>
+              </svg>
+            </div>
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4A373" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-4" aria-hidden="true">
               <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/>
             </svg>
@@ -262,12 +604,17 @@
             </p>
             <h3 class="font-serif text-2xl mb-4">
               <span class="lang-en">AI Mood Tracker</span>
-              <span class="lang-ru">AI-Трекер настроения</span>
+              <span class="lang-ru">ИИ-трекер настроения</span>
             </h3>
-            <p class="text-muted leading-relaxed mb-6">
-              <span class="lang-en">An AI-powered mood tracking web app that analyzes daily journal entries. I integrated the Puter.js API to detect emotions, generate empathetic responses, and visualize data. Key features include an interactive Chart.js graph, a bilingual interface, and dark/light theme synchronization.</span>
-              <span class="lang-ru">Веб-приложение для отслеживания настроения на базе ИИ, которое анализирует ежедневные записи. Я интегрировала API Puter.js для определения эмоций, генерации эмпатичных ответов и визуализации данных. Ключевые фичи: интерактивный график Chart.js, двуязычный интерфейс и синхронизация темной/светлой темы.</span>
+            <p class="text-muted leading-relaxed mb-4">
+              <span class="lang-en">An AI mood tracker that reads daily journal entries, detects emotion, and visualizes patterns in a bilingual dark/light UI.</span>
+              <span class="lang-ru">ИИ-трекер настроения: анализирует дневниковые записи, определяет эмоции и показывает динамику в двуязычном интерфейсе с тёмной и светлой темами.</span>
             </p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="chip">Puter.js</span>
+              <span class="chip">Chart.js</span>
+              <span class="chip">i18n</span>
+            </div>
             <a
               href="https://kuzuya17.github.io/mood-tracker/"
               target="_blank"
@@ -277,10 +624,22 @@
               <span class="lang-en">Try the App</span>
               <span class="lang-ru">Попробовать приложение</span>
               <span class="ml-2" aria-hidden="true">↗</span>
+              <span class="sr-only lang-en">(opens in a new tab)</span>
+              <span class="sr-only lang-ru">(откроется в новой вкладке)</span>
             </a>
           </article>
 
           <article class="fade-up card-hover group hover:border-[#D4A373]/30 hover:shadow-[0_0_30px_rgba(212,163,115,0.15)] transition-all duration-300 rounded-2xl border border-white/10 bg-card p-8">
+            <!-- TODO: add paper-thoughts-preview.jpg -->
+            <div class="aspect-[16/10] rounded-xl border border-white/10 mb-6 bg-gradient-to-br from-card to-ink flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4A373" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+                <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+                <path d="M10 9H8"/>
+                <path d="M16 13H8"/>
+                <path d="M16 17H8"/>
+              </svg>
+            </div>
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4A373" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-4" aria-hidden="true">
               <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
               <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
@@ -294,12 +653,17 @@
             </p>
             <h3 class="font-serif text-2xl mb-4">
               <span class="lang-en">Paper Thoughts (AI Journal)</span>
-              <span class="lang-ru">Мысли на бумаге (AI-дневник)</span>
+              <span class="lang-ru">Мысли на бумаге (ИИ-дневник)</span>
             </h3>
-            <p class="text-muted leading-relaxed mb-6">
-              <span class="lang-en">A bilingual AI journaling web app with a focus on empathetic UX. I engineered the conversational flow using custom system prompts to ensure the LLM validates user emotions and maintains context across sessions. The interface features a custom 'embossed paper' aesthetic with Tailwind CSS, smooth animations, and a responsive layout. Key technical features include Puter.js API integration, a dynamic daily summary generator, and full localization (EN/RU).</span>
-              <span class="lang-ru">Двуязычное веб-приложение-дневник с фокусом на эмпатичный UX. Я настроила логику диалога с помощью кастомных системных промптов, чтобы LLM валидировала эмоции пользователя и удерживала контекст между сессиями. Интерфейс выполнен в кастомном стиле «тисненой бумаги» на Tailwind CSS, с плавными анимациями и адаптивной версткой. Ключевые технические фичи: интеграция Puter.js API, генератор ежедневных выводов и полная локализация (EN/RU).</span>
+            <p class="text-muted leading-relaxed mb-4">
+              <span class="lang-en">A bilingual AI journal with empathetic prompts, session memory, and a daily summary generator in an embossed-paper interface.</span>
+              <span class="lang-ru">Двуязычный ИИ-дневник: эмпатичные промпты, память между сессиями и генератор ежедневных выводов в интерфейсе «тисненой бумаги».</span>
             </p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="chip">Puter.js</span>
+              <span class="chip">LLM</span>
+              <span class="chip">i18n</span>
+            </div>
             <a
               href="https://kuzuya17.github.io/paper-thoughts/"
               target="_blank"
@@ -309,43 +673,57 @@
               <span class="lang-en">Open Journal</span>
               <span class="lang-ru">Открыть дневник</span>
               <span class="ml-2" aria-hidden="true">↗</span>
+              <span class="sr-only lang-en">(opens in a new tab)</span>
+              <span class="sr-only lang-ru">(откроется в новой вкладке)</span>
             </a>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="px-6 py-24">
+    <section class="px-6 py-12" aria-labelledby="quote-heading">
+      <h2 id="quote-heading" class="sr-only">
+        <span class="lang-en">Quote</span>
+        <span class="lang-ru">Цитата</span>
+      </h2>
       <div class="max-w-3xl mx-auto text-center fade-up">
-        <blockquote class="font-serif text-2xl sm:text-3xl md:text-4xl italic leading-snug text-paper">
+        <p class="sr-only">
+          <span class="lang-en">The meaning isn't in escaping. It's in how you look at the walls. — Polina Kuzina</span>
+          <span class="lang-ru">Смысл не в побеге. Смысл в том, как я смотрю на эти стены. — Полина Кузина</span>
+        </p>
+        <blockquote class="font-serif text-2xl sm:text-3xl md:text-4xl italic leading-snug text-paper" aria-hidden="true">
           <span id="typed-quote" class="type-cursor"></span>
         </blockquote>
-        <p class="mt-8 text-amber tracking-[0.2em] uppercase text-xs">
+        <p class="mt-8 text-amber tracking-[0.2em] uppercase text-xs" aria-hidden="true">
           — <span class="lang-en">Polina Kuzina</span><span class="lang-ru">Полина Кузина</span>
         </p>
       </div>
     </section>
 
-    <section class="px-6 py-24">
+    <section id="contact" class="px-6 py-12" aria-labelledby="cta-heading">
       <div class="max-w-3xl mx-auto text-center fade-up">
         <div class="h-px gold-rule mb-12 opacity-60"></div>
-        <h2 class="font-serif text-3xl sm:text-4xl mb-10">
+        <h2 id="cta-heading" class="font-serif text-3xl sm:text-4xl mb-10">
           <span class="lang-en">Open to new projects</span>
           <span class="lang-ru">Открыта к новым проектам</span>
         </h2>
-        <a
-          href="mailto:kuzina.polina2015@gmail.com"
-          class="inline-flex items-center px-8 py-4 rounded-full bg-amber text-ink font-medium text-lg hover:brightness-110 transition duration-300"
-        >
-          <span class="lang-en">Get in Touch</span>
-          <span class="lang-ru">Связаться со мной</span>
-        </a>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href="mailto:kuzina.polina2015@gmail.com" class="btn-primary px-8 py-4 text-lg">
+            <span class="lang-en">Get in Touch</span>
+            <span class="lang-ru">Связаться со мной</span>
+          </a>
+          <!-- TODO: add cv.pdf -->
+          <a href="cv.pdf" download class="btn-outline px-8 py-4 text-lg">
+            <span class="lang-en">Download CV</span>
+            <span class="lang-ru">Скачать резюме</span>
+          </a>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="border-t border-white/5 px-6 py-10">
-    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted">
+    <div class="max-w-[75rem] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted">
       <p>
         <span class="lang-en">© 2026 Polina Kuzina</span>
         <span class="lang-ru">© 2026 Полина Кузина</span>
@@ -357,20 +735,66 @@
         </a>
         <a href="https://t.me/kUzYa_17" target="_blank" rel="noopener noreferrer" class="hover:text-amber transition-colors">
           Telegram
+          <span class="sr-only lang-en">(opens in a new tab)</span>
+          <span class="sr-only lang-ru">(откроется в новой вкладке)</span>
         </a>
       </div>
     </div>
   </footer>
+
+  <dialog id="sales-case" aria-labelledby="sales-case-title">
+    <div class="flex items-start justify-between gap-4 mb-4">
+      <h2 id="sales-case-title" class="font-serif text-2xl">
+        <span class="lang-en">AI Sales Agent — case</span>
+        <span class="lang-ru">ИИ-агент по продажам — кейс</span>
+      </h2>
+      <button type="button" id="close-sales-case" class="text-muted hover:text-amber p-1" aria-label="Close">
+        <span class="lang-en sr-only">Close</span>
+        <span class="lang-ru sr-only">Закрыть</span>
+        <span aria-hidden="true">✕</span>
+      </button>
+    </div>
+    <div class="text-muted leading-relaxed space-y-4">
+      <p>
+        <span class="lang-en"><strong class="text-paper">Problem.</strong> A scripted B2B sales bot plateaued at 97% accuracy: unpredictable customer phrasing broke the scenarios.</span>
+        <span class="lang-ru"><strong class="text-paper">Проблема.</strong> Сценарный бот для B2B-продаж упёрся в 97% точности: непредсказуемые формулировки клиентов ломали сценарии.</span>
+      </p>
+      <p>
+        <span class="lang-en"><strong class="text-paper">Solution.</strong> I transferred the existing logic into an AI agent, adapted the system prompts, and added a RAG knowledge base — keeping familiar business rules while making the dialogue more flexible.</span>
+        <span class="lang-ru"><strong class="text-paper">Решение.</strong> Перенесла существующую логику в ИИ-агента, адаптировала системные промпты и добавила базу знаний на RAG — сохранив привычные бизнес-правила и сделав диалог гибче.</span>
+      </p>
+      <p>
+        <!-- TODO: metrics -->
+        <span class="lang-en"><strong class="text-paper">Result.</strong> Metrics to be published.</span>
+        <span class="lang-ru"><strong class="text-paper">Результат.</strong> Метрики будут опубликованы.</span>
+      </p>
+    </div>
+  </dialog>
 
   <script>
     const quotes = {
       en: "The meaning isn't in escaping. It's in how you look at the walls.",
       ru: "Смысл не в побеге. Смысл в том, как я смотрю на эти стены.",
     };
+    const i18n = window.__SITE_I18N__ || {
+      titles: { en: document.title, ru: document.title },
+      descriptions: { en: "", ru: "" }
+    };
 
     const html = document.documentElement;
-    const toggle = document.getElementById("lang-toggle");
     const typedEl = document.getElementById("typed-quote");
+    const descEl = document.querySelector('meta[name="description"]');
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    const twTitle = document.querySelector('meta[name="twitter:title"]');
+    const twDesc = document.querySelector('meta[name="twitter:description"]');
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileNav = document.getElementById("mobile-nav");
+    const salesDialog = document.getElementById("sales-case");
+    const openCaseBtn = document.getElementById("open-sales-case");
+    const closeCaseBtn = document.getElementById("close-sales-case");
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     let typeTimer = null;
     let typeIndex = 0;
     let currentQuote = quotes.en;
@@ -379,11 +803,33 @@
       return html.getAttribute("lang") === "ru" ? "ru" : "en";
     }
 
+    function applyLang(lang) {
+      html.setAttribute("lang", lang);
+      try { localStorage.setItem("lang", lang); } catch (e) {}
+      document.title = i18n.titles[lang];
+      if (descEl) descEl.setAttribute("content", i18n.descriptions[lang]);
+      if (ogTitle) ogTitle.setAttribute("content", i18n.titles[lang]);
+      if (ogDesc) ogDesc.setAttribute("content", i18n.descriptions[lang]);
+      if (twTitle) twTitle.setAttribute("content", i18n.titles[lang]);
+      if (twDesc) twDesc.setAttribute("content", i18n.descriptions[lang]);
+      document.querySelectorAll(".lang-btn").forEach(function (btn) {
+        btn.setAttribute("aria-pressed", btn.getAttribute("data-lang") === lang ? "true" : "false");
+      });
+      startTypewriter();
+    }
+
     function startTypewriter() {
       currentQuote = quotes[currentLang()];
+      if (!typedEl) return;
+      if (typeTimer) clearTimeout(typeTimer);
+      if (prefersReduced) {
+        typedEl.textContent = currentQuote;
+        typedEl.classList.remove("type-cursor");
+        return;
+      }
+      typedEl.classList.add("type-cursor");
       typeIndex = 0;
       typedEl.textContent = "";
-      if (typeTimer) clearTimeout(typeTimer);
       typeNext();
     }
 
@@ -395,25 +841,78 @@
       }
     }
 
-    toggle.addEventListener("click", () => {
-      const next = currentLang() === "en" ? "ru" : "en";
-      html.setAttribute("lang", next);
-      startTypewriter();
+    document.querySelectorAll(".lang-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        applyLang(btn.getAttribute("data-lang"));
+      });
     });
 
-    startTypewriter();
-  </script>
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+    applyLang(currentLang());
+
+    function setMenuOpen(open) {
+      menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      mobileNav.hidden = !open;
+    }
+
+    menuToggle.addEventListener("click", function () {
+      setMenuOpen(menuToggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    mobileNav.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () { setMenuOpen(false); });
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") setMenuOpen(false);
+    });
+
+    const fadeObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
         if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
+          entry.target.classList.add("is-visible");
+          fadeObserver.unobserve(entry.target);
         }
       });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    document.querySelectorAll(".fade-up").forEach(function (el) {
+      if (prefersReduced) el.classList.add("is-visible");
+      else fadeObserver.observe(el);
+    });
+
+    const navObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var id = entry.target.id;
+        document.querySelectorAll("[data-nav]").forEach(function (link) {
+          link.classList.toggle("is-active", link.getAttribute("href") === "#" + id);
+        });
+      });
+    }, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
+
+    ["about", "skills", "projects", "contact"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) navObserver.observe(el);
+    });
+
+    openCaseBtn.addEventListener("click", function () {
+      salesDialog.showModal();
+    });
+
+    function closeCase() {
+      salesDialog.close();
+      openCaseBtn.focus();
+    }
+
+    closeCaseBtn.addEventListener("click", closeCase);
+    salesDialog.addEventListener("click", function (event) {
+      var rect = salesDialog.getBoundingClientRect();
+      var inside = event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
+      if (!inside) closeCase();
+    });
+    salesDialog.addEventListener("close", function () {
+      openCaseBtn.focus();
+    });
   </script>
 </body>
 </html>
