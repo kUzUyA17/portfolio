@@ -31,13 +31,18 @@
   <meta name="description" content="I design AI agents and conversations that sound human. I write prose about psychology." />
   <link rel="canonical" href="https://kuzuya17.github.io/portfolio/" />
   <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:locale:alternate" content="en_US" />
   <meta property="og:url" content="https://kuzuya17.github.io/portfolio/" />
-  <meta property="og:title" content="Polina Kuzina — AI Designer & Writer" />
-  <meta property="og:description" content="I design AI agents and conversations that sound human. I write prose about psychology." />
+  <meta property="og:title" content="Полина Кузина — ИИ-дизайнер и писательница" />
+  <meta property="og:description" content="Проектирую ИИ-агентов и диалоги, которые звучат по-человечески. Пишу прозу о психологии." />
   <meta property="og:image" content="https://kuzuya17.github.io/portfolio/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Полина Кузина — ИИ-дизайнер и писательница" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Polina Kuzina — AI Designer & Writer" />
-  <meta name="twitter:description" content="I design AI agents and conversations that sound human. I write prose about psychology." />
+  <meta name="twitter:title" content="Полина Кузина — ИИ-дизайнер и писательница" />
+  <meta name="twitter:description" content="Проектирую ИИ-агентов и диалоги, которые звучат по-человечески. Пишу прозу о психологии." />
   <meta name="twitter:image" content="https://kuzuya17.github.io/portfolio/og-image.jpg" />
   <script>
     (function () {
@@ -46,14 +51,6 @@
       var lang = document.documentElement.getAttribute("lang") === "ru" ? "ru" : "en";
       var desc = document.querySelector('meta[name="description"]');
       if (desc) desc.setAttribute("content", i.descriptions[lang]);
-      var ogT = document.querySelector('meta[property="og:title"]');
-      var ogD = document.querySelector('meta[property="og:description"]');
-      var twT = document.querySelector('meta[name="twitter:title"]');
-      var twD = document.querySelector('meta[name="twitter:description"]');
-      if (ogT) ogT.setAttribute("content", i.titles[lang]);
-      if (ogD) ogD.setAttribute("content", i.descriptions[lang]);
-      if (twT) twT.setAttribute("content", i.titles[lang]);
-      if (twD) twD.setAttribute("content", i.descriptions[lang]);
     })();
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -352,11 +349,13 @@
               <span class="sr-only lang-en">(opens in a new tab)</span>
               <span class="sr-only lang-ru">(откроется в новой вкладке)</span>
             </a>
-            <!-- TODO: add cv.pdf -->
+            <!-- TODO: uncomment when cv.pdf is added -->
+            <!--
             <a href="cv.pdf" download class="btn-outline px-6 py-3">
               <span class="lang-en">Download CV</span>
               <span class="lang-ru">Скачать резюме</span>
             </a>
+            -->
           </div>
         </div>
       </div>
@@ -712,11 +711,13 @@
             <span class="lang-en">Get in Touch</span>
             <span class="lang-ru">Связаться со мной</span>
           </a>
-          <!-- TODO: add cv.pdf -->
+          <!-- TODO: uncomment when cv.pdf is added -->
+          <!--
           <a href="cv.pdf" download class="btn-outline px-8 py-4 text-lg">
             <span class="lang-en">Download CV</span>
             <span class="lang-ru">Скачать резюме</span>
           </a>
+          -->
         </div>
       </div>
     </section>
@@ -765,8 +766,8 @@
       </p>
       <p>
         <!-- TODO: metrics -->
-        <span class="lang-en"><strong class="text-paper">Result.</strong> Metrics to be published.</span>
-        <span class="lang-ru"><strong class="text-paper">Результат.</strong> Метрики будут опубликованы.</span>
+        <span class="lang-en"><strong class="text-paper">Result.</strong> The agent kept the familiar business logic of the scripted bot, but became more flexible with unusual customer requests.</span>
+        <span class="lang-ru"><strong class="text-paper">Результат.</strong> Агент сохранил привычную бизнес-логику сценарного бота, но стал гибче отвечать на нестандартные запросы клиентов.</span>
       </p>
     </div>
   </dialog>
@@ -784,10 +785,6 @@
     const html = document.documentElement;
     const typedEl = document.getElementById("typed-quote");
     const descEl = document.querySelector('meta[name="description"]');
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    const ogDesc = document.querySelector('meta[property="og:description"]');
-    const twTitle = document.querySelector('meta[name="twitter:title"]');
-    const twDesc = document.querySelector('meta[name="twitter:description"]');
     const menuToggle = document.getElementById("menu-toggle");
     const mobileNav = document.getElementById("mobile-nav");
     const salesDialog = document.getElementById("sales-case");
@@ -808,10 +805,6 @@
       try { localStorage.setItem("lang", lang); } catch (e) {}
       document.title = i18n.titles[lang];
       if (descEl) descEl.setAttribute("content", i18n.descriptions[lang]);
-      if (ogTitle) ogTitle.setAttribute("content", i18n.titles[lang]);
-      if (ogDesc) ogDesc.setAttribute("content", i18n.descriptions[lang]);
-      if (twTitle) twTitle.setAttribute("content", i18n.titles[lang]);
-      if (twDesc) twDesc.setAttribute("content", i18n.descriptions[lang]);
       document.querySelectorAll(".lang-btn").forEach(function (btn) {
         btn.setAttribute("aria-pressed", btn.getAttribute("data-lang") === lang ? "true" : "false");
       });
@@ -849,9 +842,19 @@
 
     applyLang(currentLang());
 
-    function setMenuOpen(open) {
+    function menuFocusables() {
+      return [menuToggle].concat(Array.from(mobileNav.querySelectorAll("a")));
+    }
+
+    function setMenuOpen(open, restoreFocus) {
       menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
       mobileNav.hidden = !open;
+      if (open) {
+        var firstLink = mobileNav.querySelector("a");
+        if (firstLink) firstLink.focus();
+      } else if (restoreFocus !== false) {
+        menuToggle.focus();
+      }
     }
 
     menuToggle.addEventListener("click", function () {
@@ -859,11 +862,26 @@
     });
 
     mobileNav.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () { setMenuOpen(false); });
+      link.addEventListener("click", function () { setMenuOpen(false, false); });
     });
 
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") setMenuOpen(false);
+      var menuOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      if (event.key === "Escape" && menuOpen) {
+        setMenuOpen(false);
+        return;
+      }
+      if (event.key !== "Tab" || !menuOpen) return;
+      var items = menuFocusables();
+      var first = items[0];
+      var last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     });
 
     const fadeObserver = new IntersectionObserver(function (entries) {
